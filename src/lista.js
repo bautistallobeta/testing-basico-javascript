@@ -21,20 +21,34 @@ module.exports = class Lista {
 
     find(clave){
         var resultado = NaN
+        var elemento = this.#findElem(clave)
+        if(elemento) resultado = elemento.valor
+        return resultado
+    }
+
+    add(clave, valor){
+        var elemento = this.#findElem(clave)
+
+        if(elemento){
+            elemento.valor = valor
+        }else{
+            this.#lista.push({clave: clave, valor: valor})
+        }
+        }
+    
+
+    //Funcion privada auxiliar para encontrar elementos por clave
+    #findElem(clave){
+        var elemento = NaN
         if(this.#lista.length > 0){
             this.#lista.forEach(element => {
                 if(element.clave == clave){
-                    resultado = element.valor
+                    elemento = element
                 }
             })          
             }
-        return resultado
+        return elemento
         }
 
-
-    add(clave, valor){
-
-        this.#lista.push({clave: clave, valor: valor})
     }
 
-}

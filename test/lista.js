@@ -61,9 +61,9 @@ describe('En una lista de pares clave:valor ...', function () {
     it('la cantidad de elementos en la lista no cambia', function(){
       assert.equal(lista.count(),1)
     })
-    //it('se actualiza el valor almacenado', function(){
-    //  assert.equal(lista.find('clave'), 'value')
-    //})
+    it('se actualiza el valor almacenado', function(){
+      assert.equal(lista.find('clave'), 'value')
+    })
   })
 
 
