@@ -22,20 +22,58 @@ module.exports = class Lista {
     find(clave){
         var resultado = NaN
         var elemento = this.#findElem(clave)
-        if(elemento) resultado = elemento.valor
+        if(elemento){
+            resultado = elemento.valor
+        } 
         return resultado
     }
 
     add(clave, valor){
-        var elemento = this.#findElem(clave)
+        if(typeof clave == 'string' && clave != ''){
+            var elemento = this.#findElem(clave)
 
-        if(elemento){
-            elemento.valor = valor
-        }else{
-            this.#lista.push({clave: clave, valor: valor})
+            if(elemento){
+                elemento.valor = valor
+            }else{
+                this.#lista.push({clave: clave, valor: valor})
+            }
+            this.order()
         }
         }
+        
     
+    remove(clave){
+        var listaNueva = []
+        this.#lista.forEach( (element) => {
+            if(element.clave != clave){
+                listaNueva.push({clave: element.clave, valor: element.valor})
+            }
+        })
+        this.#lista = listaNueva
+    }
+       
+
+    keys(){
+        let claves = []
+        this.#lista.forEach(element => {
+            claves.push(element.clave)
+        })
+        return claves
+    }
+
+    order(){
+        let claves = this.keys()
+        claves.sort()
+        var listaNueva = []
+        claves.forEach( (key) => {
+            listaNueva.push({clave: key, valor: this.find(key)})
+        })
+        this.#lista = listaNueva
+    }
+
+
+
+
 
     //Funcion privada auxiliar para encontrar elementos por clave
     #findElem(clave){
@@ -48,7 +86,7 @@ module.exports = class Lista {
             })          
             }
         return elemento
-        }
-
     }
+}
+
 
